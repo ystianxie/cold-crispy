@@ -1,15 +1,66 @@
 {
   "name": "cold-crispy",
-  "version": "0.1.0",
+  "version": "0.1.9",
   "private": true,
+  "main": "main.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "electron": "electron .",
+    "vue-build": "vue-cli-service build",
+    "electron-build": "electron-builder",
+    "electron-build-win": "electron-builder --win --x64"
+  },
+  "build": {
+    "appId": "com.starsxu.coldCrispy",
+    "productName": "寒酥",
+    "directories": {
+      "output": "dist_electron"
+    },
+    "files": [
+      "dist/**/*",
+      "App.vue",
+      "main.js",
+      "src/assets/**/*",
+      "src/serve/**/*"
+    ],
+    "mac": {
+      "icon": "./src/assets/雪花-512.png",
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "icon": "./src/assets/雪花-512.png",
+      "target": [
+        "nsis"
+      ],
+      "extraResources": [
+        {
+          "from": "./src/winTools",
+          "to": "tools"
+        }
+      ],
+      "asar": true
+    },
+    "nsis": {
+      "include": "installer.nsh",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   },
   "dependencies": {
+    "@alicloud/pop-core": "^1.7.13",
+    "@element-plus/icons-vue": "^2.1.0",
+    "axios": "^1.4.0",
+    "camelcase": "^7.0.1",
     "core-js": "^3.8.3",
+    "electron-settings": "^4.0.2",
+    "element-plus": "^2.3.7",
+    "franc-min": "^6.1.0",
+    "lodash": "^4.17.21",
+    "node-polyfill-webpack-plugin": "^2.0.1",
     "register-service-worker": "^1.7.2",
+    "unplugin-element-plus": "^0.7.2",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
@@ -23,8 +74,11 @@
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "electron": "^25.2.0",
+    "electron-builder": "^24.4.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "node-abi": "^3.45.0",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0"
   }
